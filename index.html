@@ -5,12 +5,28 @@
 <title>DeployLynx</title>
 
 <link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <script defer src="script.js"></script>
 
 <style>
 
-/* FLOATING DOTS BACKGROUND */
+/* TOP RIGHT TYPING */
+.top-typing{
+position:fixed;
+top:10px;
+right:20px;
+font-size:13px;
+color:gold;
+font-weight:bold;
+}
+
+/* QUOTE */
+.quote{
+margin-top:20px;
+font-size:18px;
+color:#ffb6c1;
+height:25px;
+}
+
 canvas{
 position:fixed;
 top:0;
@@ -40,6 +56,8 @@ background:#020617;
 
 <body>
 
+<div class="top-typing" id="topText"></div>
+
 <canvas id="bg"></canvas>
 
 <nav>
@@ -62,10 +80,11 @@ DeployLynx
 
 <p>AI Automation • DevOps • Cloud Solutions</p>
 
+<div class="quote" id="quote"></div>
+
 </section>
 
 <!-- GitHub Stats -->
-
 <section class="stats">
 
 <h2>GitHub Activity</h2>
@@ -120,13 +139,45 @@ requestAnimationFrame(animate);
 
 animate();
 
-/* GITHUB API */
+/* GITHUB STATS */
 fetch("https://api.github.com/repos/Deploylynx/deploylynx-devsecops-pipeline")
 .then(res=>res.json())
 .then(data=>{
 document.getElementById("stars").innerText=data.stargazers_count;
 document.getElementById("forks").innerText=data.forks_count;
 });
+
+/* TOP RIGHT LOOP TYPING */
+let text="DeployLynx.com";
+let i=0;
+
+function loopTyping(){
+if(i<text.length){
+document.getElementById("topText").innerHTML+=text.charAt(i);
+i++;
+setTimeout(loopTyping,100);
+}else{
+setTimeout(()=>{
+document.getElementById("topText").innerHTML="";
+i=0;
+loopTyping();
+},1500);
+}
+}
+loopTyping();
+
+/* QUOTE TYPING */
+let quoteText="Engineering scalable systems. Automating the future.";
+let j=0;
+
+function typeQuote(){
+if(j<quoteText.length){
+document.getElementById("quote").innerHTML+=quoteText.charAt(j);
+j++;
+setTimeout(typeQuote,50);
+}
+}
+typeQuote();
 
 </script>
 
