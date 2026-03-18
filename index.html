@@ -19,10 +19,10 @@ background:#0f172a;
 color:white;
 overflow-x:hidden;
 cursor:none;
+scroll-behavior:smooth;
 }
 
-/* custom cursor */
-
+/* cursor */
 .cursor{
 width:12px;
 height:12px;
@@ -35,7 +35,6 @@ box-shadow:0 0 15px gold;
 }
 
 /* loader */
-
 #loader{
 position:fixed;
 width:100%;
@@ -45,21 +44,15 @@ display:flex;
 justify-content:center;
 align-items:center;
 z-index:1000;
+transition:0.5s;
 }
 
-#loader h1{
-color:#38bdf8;
-animation:pulse 1s infinite;
-}
-
-@keyframes pulse{
-0%{opacity:0.3}
-50%{opacity:1}
-100%{opacity:0.3}
+#loader.hide{
+opacity:0;
+visibility:hidden;
 }
 
 /* canvas */
-
 canvas{
 position:fixed;
 top:0;
@@ -68,7 +61,6 @@ z-index:-1;
 }
 
 /* navbar */
-
 nav{
 display:flex;
 justify-content:space-between;
@@ -76,6 +68,7 @@ padding:20px 40px;
 background:#020617;
 position:sticky;
 top:0;
+z-index:100;
 }
 
 nav a{
@@ -90,7 +83,6 @@ color:gold;
 }
 
 /* hero */
-
 .hero{
 height:80vh;
 display:flex;
@@ -98,6 +90,14 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
+opacity:0;
+transform:translateY(40px);
+transition:1s;
+}
+
+.hero.show{
+opacity:1;
+transform:translateY(0);
 }
 
 .hero h1{
@@ -110,8 +110,7 @@ font-size:22px;
 color:#cbd5f5;
 }
 
-/* CTA button */
-
+/* button */
 .btn{
 padding:12px 25px;
 background:#38bdf8;
@@ -128,8 +127,19 @@ background:gold;
 transform:scale(1.05);
 }
 
-/* projects */
+/* sections animation */
+.fade{
+opacity:0;
+transform:translateY(40px);
+transition:0.8s;
+}
 
+.fade.show{
+opacity:1;
+transform:translateY(0);
+}
+
+/* projects */
 .projects{
 display:flex;
 flex-wrap:wrap;
@@ -157,17 +167,7 @@ width:100%;
 border-radius:10px;
 }
 
-.card h3{
-margin:15px 0;
-}
-
-.card a{
-color:#38bdf8;
-text-decoration:none;
-}
-
 /* tools */
-
 .stack{
 text-align:center;
 padding:60px;
@@ -184,7 +184,6 @@ transform:scale(1.2);
 }
 
 /* stats */
-
 .stats{
 text-align:center;
 padding:60px;
@@ -195,20 +194,14 @@ font-size:35px;
 color:#38bdf8;
 }
 
-/* CTA section */
-
+/* CTA */
 .cta{
 text-align:center;
 padding:80px;
 background:#020617;
 }
 
-.cta h2{
-font-size:30px;
-}
-
 /* social */
-
 .social{
 font-size:40px;
 text-align:center;
@@ -226,7 +219,6 @@ color:gold;
 }
 
 /* footer */
-
 footer{
 background:#020617;
 padding:20px;
@@ -238,7 +230,7 @@ text-align:center;
 
 <body>
 
-<div id="loader"><h1>DeployLynx</h1></div>
+<div id="loader"><h1>Loading DeployLynx...</h1></div>
 <div class="cursor" id="cursor"></div>
 
 <canvas id="network"></canvas>
@@ -253,16 +245,13 @@ text-align:center;
 </div>
 </nav>
 
-<div class="hero">
+<div class="hero" id="hero">
 <h1>DeployLynx</h1>
 <p>DevOps • Cloud • Automation</p>
 <a href="#projects" class="btn">Explore Projects</a>
 </div>
 
-<!-- Projects -->
-
-<section id="projects" class="projects">
-
+<section id="projects" class="projects fade">
 <div class="card" onclick="window.open('https://github.com/Deploylynx-tech/deploylynx-devsecops-pipeline')">
 <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c">
 <h3>DevSecOps Pipeline</h3>
@@ -282,12 +271,9 @@ text-align:center;
 <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995">
 <h3>Monitoring Stack</h3>
 </div>
-
 </section>
 
-<!-- Tools -->
-
-<section id="tools" class="stack">
+<section id="tools" class="stack fade">
 <h2>DevOps Tool Stack</h2>
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg">
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg">
@@ -297,25 +283,19 @@ text-align:center;
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg">
 </section>
 
-<!-- Stats -->
-
-<section id="stats" class="stats">
+<section id="stats" class="stats fade">
 <h2>GitHub Activity</h2>
 ⭐ Stars: <span id="stars" class="counter">0</span><br><br>
 🍴 Forks: <span id="forks" class="counter">0</span>
 </section>
 
-<!-- CTA -->
-
-<section class="cta">
+<section class="cta fade">
 <h2>🚀 Ready to Build Scalable Systems?</h2>
 <p>Let DeployLynx handle your DevOps & Cloud infrastructure</p>
 <a href="#connect" class="btn">Contact Now</a>
 </section>
 
-<!-- Social -->
-
-<section id="connect" class="social">
+<section id="connect" class="social fade">
 <a href="https://github.com/Deploylynx-tech" target="_blank"><i class="fab fa-github"></i></a>
 <a href="https://www.linkedin.com/company/linkedin-deploylynx-devops/" target="_blank"><i class="fab fa-linkedin"></i></a>
 <a href="https://www.instagram.com/deploylynx26/" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -328,48 +308,49 @@ DeployLynx © 2026
 
 <script>
 
-/* SAFE loader */
-window.addEventListener("load", () => {
-  const loader = document.getElementById("loader");
-  if(loader) loader.style.display = "none";
+/* loader fix */
+window.addEventListener("load", ()=>{
+setTimeout(()=>{
+document.getElementById("loader").classList.add("hide");
+},800);
 });
 
-/* SAFE cursor */
-const cursor = document.getElementById("cursor");
-if(cursor){
-  document.addEventListener("mousemove", e=>{
-    cursor.style.left = e.clientX+"px";
-    cursor.style.top = e.clientY+"px";
-  });
+/* cursor */
+const cursor=document.getElementById("cursor");
+document.addEventListener("mousemove",e=>{
+cursor.style.left=e.clientX+"px";
+cursor.style.top=e.clientY+"px";
+});
+
+/* scroll animation */
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add("show");
 }
-
-/* SAFE smooth scroll */
-document.querySelectorAll("a[href^='#']").forEach(anchor=>{
-  anchor.addEventListener("click", function(e){
-    const target = document.querySelector(this.getAttribute("href"));
-    if(target){
-      e.preventDefault();
-      target.scrollIntoView({behavior:"smooth"});
-    }
-  });
+});
 });
 
-/* SAFE canvas */
+document.querySelectorAll(".fade").forEach(el=>{
+observer.observe(el);
+});
 
-const canvas = document.getElementById("network");
+/* hero show */
+setTimeout(()=>{
+document.getElementById("hero").classList.add("show");
+},200);
 
-if(canvas){
-const ctx = canvas.getContext("2d");
+/* canvas */
+const canvas=document.getElementById("network");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let particles = [];
-
-for (let i = 0; i < 60; i++) {
+let particles=[];
+for(let i=0;i<60;i++){
 particles.push({
-x: Math.random()*canvas.width,
-y: Math.random()*canvas.height,
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
 dx:(Math.random()-0.5),
 dy:(Math.random()-0.5)
 });
@@ -377,37 +358,29 @@ dy:(Math.random()-0.5)
 
 function animate(){
 ctx.clearRect(0,0,canvas.width,canvas.height);
-
 particles.forEach(p=>{
 p.x+=p.dx;
 p.y+=p.dy;
-
 if(p.x<0||p.x>canvas.width)p.dx*=-1;
 if(p.y<0||p.y>canvas.height)p.dy*=-1;
-
 ctx.fillStyle="#38bdf8";
 ctx.beginPath();
 ctx.arc(p.x,p.y,2,0,Math.PI*2);
 ctx.fill();
 });
-
 requestAnimationFrame(animate);
 }
-
 animate();
-}
 
-/* SAFE GitHub stats */
-
+/* GitHub stats */
 fetch("https://api.github.com/repos/Deploylynx-tech/deploylynx-devsecops-pipeline")
 .then(res=>res.json())
 .then(data=>{
-  if(document.getElementById("stars"))
-    document.getElementById("stars").innerText=data.stargazers_count;
-
-  if(document.getElementById("forks"))
-    document.getElementById("forks").innerText=data.forks_count;
-})
-.catch(()=>console.log("GitHub API error"));
+document.getElementById("stars").innerText=data.stargazers_count;
+document.getElementById("forks").innerText=data.forks_count;
+});
 
 </script>
+
+</body>
+</html>
