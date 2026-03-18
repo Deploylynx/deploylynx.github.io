@@ -1,80 +1,113 @@
-body {
-  font-family: Arial;
-  margin: 0;
-  background: #0a0f1c;
-  color: white;
+:root{
+--bg:#0f172a;
+--text:#fff;
+--card:#1e293b;
+--accent:#38bdf8;
 }
 
-header {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-  background: #111827;
+.light{
+--bg:#f8fafc;
+--text:#0f172a;
+--card:#fff;
+--accent:#0ea5e9;
 }
 
-nav a {
-  margin: 10px;
-  color: #00ffd5;
-  text-decoration: none;
+body{
+margin:0;
+font-family:Arial;
+background:var(--bg);
+color:var(--text);
 }
 
-.hero {
-  text-align: center;
-  padding: 100px;
+/* NAVBAR */
+nav{
+display:flex;
+justify-content:space-between;
+padding:20px 40px;
+background:#020617;
 }
 
-.btn {
-  padding: 10px 20px;
-  background: #00ffd5;
-  color: black;
-  text-decoration: none;
+nav a{
+color:white;
+margin-left:20px;
+text-decoration:none;
 }
 
-.cards {
-  display: flex;
-  gap: 20px;
-  padding: 20px;
+nav a:hover{
+color:var(--accent);
 }
 
-.card {
-  background: #1f2937;
-  padding: 20px;
-  flex: 1;
-  text-align: center;
+/* CURSOR */
+.cursor{
+position:fixed;
+width:15px;
+height:15px;
+background:gold;
+border-radius:50%;
+box-shadow:0 0 15px gold, 0 0 30px gold;
+pointer-events:none;
+z-index:999;
 }
 
-footer {
-  text-align: center;
-  padding: 20px;
-  background: #111827;
+/* SECTIONS */
+section{
+padding:80px;
+text-align:center;
 }
 
-.contact-section {
-  text-align: center;
-  padding: 60px 20px;
+/* CARD */
+.card{
+background:var(--card);
+padding:20px;
+border-radius:12px;
+transition:.3s;
 }
 
-.contact-form {
-  max-width: 500px;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+.card:hover{
+transform:scale(1.05);
+box-shadow:0 0 20px #38bdf8;
 }
 
-.contact-form input,
-.contact-form textarea {
-  padding: 12px;
-  border: none;
-  border-radius: 6px;
-  outline: none;
+/* BUTTON */
+.btn{
+background:var(--accent);
+padding:10px 20px;
+color:white;
+text-decoration:none;
+border-radius:6px;
+display:inline-block;
+margin-top:10px;
 }
 
-.contact-form button {
-  padding: 12px;
-  background: #00ffd5;
-  color: black;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
+.btn:hover{
+background:white;
+color:black;
+}
+
+/* CONTACT FORM */
+form{
+max-width:400px;
+margin:auto;
+background:var(--card);
+padding:20px;
+border-radius:10px;
+}
+
+input,textarea{
+width:100%;
+margin:10px 0;
+padding:10px;
+border:none;
+border-radius:6px;
+}
+
+/* SOCIAL */
+.social a{
+font-size:30px;
+margin:10px;
+color:white;
+}
+
+.social a:hover{
+color:#38bdf8;
 }
