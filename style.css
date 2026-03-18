@@ -1,0 +1,80 @@
+body {
+  font-family: Arial;
+  margin: 0;
+  background: #0a0f1c;
+  color: white;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background: #111827;
+}
+
+nav a {
+  margin: 10px;
+  color: #00ffd5;
+  text-decoration: none;
+}
+
+.hero {
+  text-align: center;
+  padding: 100px;
+}
+
+.btn {
+  padding: 10px 20px;
+  background: #00ffd5;
+  color: black;
+  text-decoration: none;
+}
+
+.cards {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  background: #1f2937;
+  padding: 20px;
+  flex: 1;
+  text-align: center;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #111827;
+}
+
+.contact-section {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.contact-form {
+  max-width: 500px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+}
+
+.contact-form button {
+  padding: 12px;
+  background: #00ffd5;
+  color: black;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
