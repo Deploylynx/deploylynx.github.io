@@ -18,41 +18,10 @@ font-family:Arial;
 background:#0f172a;
 color:white;
 overflow-x:hidden;
-cursor:none;
-scroll-behavior:smooth;
 }
 
-/* cursor */
-.cursor{
-width:12px;
-height:12px;
-border-radius:50%;
-background:gold;
-position:fixed;
-pointer-events:none;
-z-index:999;
-box-shadow:0 0 15px gold;
-}
+/* animated background canvas */
 
-/* loader */
-#loader{
-position:fixed;
-width:100%;
-height:100%;
-background:#020617;
-display:flex;
-justify-content:center;
-align-items:center;
-z-index:1000;
-transition:0.5s;
-}
-
-#loader.hide{
-opacity:0;
-visibility:hidden;
-}
-
-/* canvas */
 canvas{
 position:fixed;
 top:0;
@@ -61,29 +30,28 @@ z-index:-1;
 }
 
 /* navbar */
-<nav>
-<div><strong>DeployLynx</strong></div>
 
-<div>
-<a href="index.html">Home</a>
-<a href="projects.html">Projects</a>
-<a href="about.html">About</a>
-<a href="contact.html">Contact</a>
-</div>
-</nav>
+nav{
+display:flex;
+justify-content:space-between;
+padding:20px 40px;
+background:#020617;
+position:sticky;
+top:0;
+}
 
 nav a{
 color:white;
 text-decoration:none;
 margin-left:20px;
-transition:.3s;
 }
 
 nav a:hover{
-color:gold;
+color:#38bdf8;
 }
 
 /* hero */
+
 .hero{
 height:80vh;
 display:flex;
@@ -91,14 +59,6 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
-opacity:0;
-transform:translateY(40px);
-transition:1s;
-}
-
-.hero.show{
-opacity:1;
-transform:translateY(0);
 }
 
 .hero h1{
@@ -111,36 +71,8 @@ font-size:22px;
 color:#cbd5f5;
 }
 
-/* button */
-.btn{
-padding:12px 25px;
-background:#38bdf8;
-color:black;
-border-radius:6px;
-text-decoration:none;
-margin-top:20px;
-display:inline-block;
-transition:.3s;
-}
-
-.btn:hover{
-background:gold;
-transform:scale(1.05);
-}
-
-/* sections animation */
-.fade{
-opacity:0;
-transform:translateY(40px);
-transition:0.8s;
-}
-
-.fade.show{
-opacity:1;
-transform:translateY(0);
-}
-
 /* projects */
+
 .projects{
 display:flex;
 flex-wrap:wrap;
@@ -155,12 +87,10 @@ padding:20px;
 width:260px;
 border-radius:12px;
 transition:.3s;
-cursor:pointer;
 }
 
 .card:hover{
-transform:translateY(-10px) scale(1.03);
-box-shadow:0 0 20px rgba(255,215,0,0.5);
+transform:translateY(-10px);
 }
 
 .card img{
@@ -168,7 +98,17 @@ width:100%;
 border-radius:10px;
 }
 
-/* tools */
+.card h3{
+margin:15px 0;
+}
+
+.card a{
+color:#38bdf8;
+text-decoration:none;
+}
+
+/* devops stack */
+
 .stack{
 text-align:center;
 padding:60px;
@@ -185,6 +125,7 @@ transform:scale(1.2);
 }
 
 /* stats */
+
 .stats{
 text-align:center;
 padding:60px;
@@ -195,14 +136,8 @@ font-size:35px;
 color:#38bdf8;
 }
 
-/* CTA */
-.cta{
-text-align:center;
-padding:80px;
-background:#020617;
-}
-
 /* social */
+
 .social{
 font-size:40px;
 text-align:center;
@@ -212,14 +147,14 @@ padding:40px;
 .social a{
 margin:15px;
 color:white;
-transition:.3s;
 }
 
 .social a:hover{
-color:gold;
+color:#38bdf8;
 }
 
 /* footer */
+
 footer{
 background:#020617;
 padding:20px;
@@ -231,155 +166,196 @@ text-align:center;
 
 <body>
 
-<div id="loader"><h1>Loading DeployLynx...</h1></div>
-<div class="cursor" id="cursor"></div>
-
 <canvas id="network"></canvas>
 
 <nav>
+
 <div><strong>DeployLynx</strong></div>
+
 <div>
 <a href="#projects">Projects</a>
 <a href="#tools">Tools</a>
 <a href="#stats">Stats</a>
 <a href="#connect">Connect</a>
 </div>
+
 </nav>
 
-<div class="hero" id="hero">
+<div class="hero">
+
 <h1>DeployLynx</h1>
 <p>DevOps • Cloud • Automation</p>
-<a href="#projects" class="btn">Explore Projects</a>
+
 </div>
 
-<section id="projects" class="projects fade">
-<div class="card" onclick="window.open('https://github.com/Deploylynx-tech/deploylynx-devsecops-pipeline')">
+<!-- Projects -->
+
+<section id="projects" class="projects">
+
+<div class="card">
+
 <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c">
+
 <h3>DevSecOps Pipeline</h3>
+
+<a href="https://github.com/Deploylynx-tech/deploylynx-devsecops-pipeline" target="_blank">
+Open Repository
+</a>
+
 </div>
 
-<div class="card" onclick="window.open('https://github.com/Deploylynx-tech/deploylynx-kubernetes-cluster')">
+<div class="card">
+
 <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa">
-<h3>Kubernetes Cluster</h3>
+
+<h3>Terraform Infrastructure</h3>
+
+<a href="https://github.com/Deploylynx-tech/deploylynx-infrastructure" target="_blank">
+Open Repository
+</a>
+
 </div>
 
-<div class="card" onclick="window.open('https://github.com/Deploylynx-tech/deploylynx-terraform-aws')">
+<div class="card">
+
 <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31">
-<h3>Terraform AWS</h3>
+
+<h3>Monitoring Stack</h3>
+
+<a href="https://github.com/Deploylynx-tech/deploylynx-monitoring" target="_blank">
+Open Repository
+</a>
+
 </div>
 
-<div class="card" onclick="window.open('https://github.com/Deploylynx-tech/deploylynx-monitoring-stack')">
+<div class="card">
+
 <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995">
-<h3>Monitoring Stack</h3>
+
+<h3>AI Automation Tools</h3>
+
+<a href="https://github.com/Deploylynx-tech/ai-automation-tools" target="_blank">
+Open Repository
+</a>
+
 </div>
+
 </section>
 
-<section id="tools" class="stack fade">
+<!-- DevOps tools -->
+
+<section id="tools" class="stack">
+
 <h2>DevOps Tool Stack</h2>
+
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg">
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg">
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg">
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg">
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg">
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg">
+
 </section>
 
-<section id="stats" class="stats fade">
+<!-- GitHub stats -->
+
+<section id="stats" class="stats">
+
 <h2>GitHub Activity</h2>
+
 ⭐ Stars: <span id="stars" class="counter">0</span><br><br>
 🍴 Forks: <span id="forks" class="counter">0</span>
+
 </section>
 
-<section class="cta fade">
-<h2>🚀 Ready to Build Scalable Systems?</h2>
-<p>Let DeployLynx handle your DevOps & Cloud infrastructure</p>
-<a href="#connect" class="btn">Contact Now</a>
-</section>
+<!-- social -->
 
-<section id="connect" class="social fade">
-<a href="https://github.com/Deploylynx-tech" target="_blank"><i class="fab fa-github"></i></a>
-<a href="https://www.linkedin.com/company/linkedin-deploylynx-devops/" target="_blank"><i class="fab fa-linkedin"></i></a>
-<a href="https://www.instagram.com/deploylynx26/" target="_blank"><i class="fab fa-instagram"></i></a>
-<a href="mailto:deploylynx26@gmail.com"><i class="fas fa-envelope"></i></a>
+<section id="connect" class="social">
+
+<a href="https://github.com/Deploylynx-tech" target="_blank">
+<i class="fab fa-github"></i>
+</a>
+
+<a href="https://www.linkedin.com/company/linkedin-deploylynx-devops/" target="_blank">
+<i class="fab fa-linkedin"></i>
+</a>
+
+<a href="https://www.instagram.com/deploylynx26/" target="_blank">
+<i class="fab fa-instagram"></i>
+</a>
+
+<a href="mailto:deploylynx@email.com">
+<i class="fas fa-envelope"></i>
+</a>
+
 </section>
 
 <footer>
+
 DeployLynx © 2026
+
 </footer>
 
 <script>
 
-/* loader fix */
-window.addEventListener("load", ()=>{
-setTimeout(()=>{
-document.getElementById("loader").classList.add("hide");
-},800);
-});
+/* animated bubbles */
 
-/* cursor */
-const cursor=document.getElementById("cursor");
-document.addEventListener("mousemove",e=>{
-cursor.style.left=e.clientX+"px";
-cursor.style.top=e.clientY+"px";
-});
+const canvas = document.getElementById("network");
+const ctx = canvas.getContext("2d");
 
-/* scroll animation */
-const observer=new IntersectionObserver(entries=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-entry.target.classList.add("show");
-}
-});
-});
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-document.querySelectorAll(".fade").forEach(el=>{
-observer.observe(el);
-});
+let particles = [];
 
-/* hero show */
-setTimeout(()=>{
-document.getElementById("hero").classList.add("show");
-},200);
+for (let i = 0; i < 80; i++) {
 
-/* canvas */
-const canvas=document.getElementById("network");
-const ctx=canvas.getContext("2d");
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
-
-let particles=[];
-for(let i=0;i<60;i++){
 particles.push({
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-dx:(Math.random()-0.5),
-dy:(Math.random()-0.5)
+
+x: Math.random() * canvas.width,
+y: Math.random() * canvas.height,
+dx: (Math.random() - 0.5),
+dy: (Math.random() - 0.5)
+
 });
+
 }
 
 function animate(){
+
 ctx.clearRect(0,0,canvas.width,canvas.height);
+
 particles.forEach(p=>{
-p.x+=p.dx;
-p.y+=p.dy;
-if(p.x<0||p.x>canvas.width)p.dx*=-1;
-if(p.y<0||p.y>canvas.height)p.dy*=-1;
+
+p.x += p.dx;
+p.y += p.dy;
+
+if(p.x < 0 || p.x > canvas.width) p.dx *= -1;
+if(p.y < 0 || p.y > canvas.height) p.dy *= -1;
+
 ctx.fillStyle="#38bdf8";
 ctx.beginPath();
 ctx.arc(p.x,p.y,2,0,Math.PI*2);
 ctx.fill();
+
 });
+
 requestAnimationFrame(animate);
+
 }
+
 animate();
 
 /* GitHub stats */
+
 fetch("https://api.github.com/repos/Deploylynx-tech/deploylynx-devsecops-pipeline")
+
 .then(res=>res.json())
+
 .then(data=>{
-document.getElementById("stars").innerText=data.stargazers_count;
-document.getElementById("forks").innerText=data.forks_count;
-});
+document.getElementById("stars").innerText=data.stargazers_count
+document.getElementById("forks").innerText=data.forks_count
+})
 
 </script>
 
