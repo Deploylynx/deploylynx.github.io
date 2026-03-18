@@ -1,47 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact | DeployLynx</title>
-<link rel="stylesheet" href="style.css">
-</head>
+<section>
 
-<body>
+<h2>Contact</h2>
 
-<header>
-  <h1>DeployLynx</h1>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-  </nav>
-</header>
+<form onsubmit="sendMail(event)" class="card">
 
-<section class="contact-section">
-  <h2>Contact Us</h2>
-  <p>Let’s build something powerful together 🚀</p>
+<input type="text" id="name" placeholder="Your Name" required>
+<input type="email" id="email" placeholder="Your Email" required>
+<textarea id="message" placeholder="Message"></textarea>
 
-  <form action="https://formspree.io/f/xpqykbvr" method="POST" class="contact-form">
-    
-    <input type="text" name="name" placeholder="Your Name" required>
-    
-    <input type="email" name="email" placeholder="Your Email" required>
+<button class="btn">Send</button>
 
-    <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+</form>
 
-    <!-- Optional hidden fields -->
-    <input type="hidden" name="_subject" value="New DeployLynx Inquiry">
-    <input type="hidden" name="_replyto" value="deploylynx26@gmail.com">
+<div class="social">
 
-    <button type="submit">Send Message</button>
-  </form>
+<a href="https://github.com/Deploylynx"><i class="fab fa-github"></i></a>
+<a href="https://www.linkedin.com/company/linkedin-deploylynx-devops/?viewAsMember=true"><i class="fab fa-linkedin"></i></a>
+<a href="https://www.instagram.com/deploylynx26/?hl=en"><i class="fab fa-instagram"></i></a>
+<a href="mailto:deploylynx26@gmail.com"><i class="fas fa-envelope"></i></a>
+
+</div>
 
 </section>
-
-<footer>
-  <p>© 2026 DeployLynx. All rights reserved.</p>
-</footer>
-
-</body>
-</html>
