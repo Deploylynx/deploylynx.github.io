@@ -4,63 +4,101 @@
 <meta charset="UTF-8">
 <title>DeployLynx</title>
 
-<link rel="stylesheet" href="style.css">
-<script defer src="script.js"></script>
-
 <style>
 
-/* BACKGROUND GRADIENT ANIMATION */
 body{
-background:linear-gradient(270deg,#0f172a,#020617,#1e293b);
-background-size:600% 600%;
-animation:bgMove 12s ease infinite;
+margin:0;
+font-family:Arial;
+background:#0f172a;
+color:white;
+overflow-x:hidden;
 }
 
-@keyframes bgMove{
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
+/* TECH BACKGROUND */
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-1;
 }
 
-/* GLASS CARD */
+/* NAVBAR */
+nav{
+display:flex;
+justify-content:space-between;
+padding:20px 40px;
+background:#020617;
+position:sticky;
+top:0;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+margin-left:20px;
+}
+
+nav a:hover{
+color:#38bdf8;
+}
+
+/* HERO */
+.hero{
+height:80vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+}
+
+.hero h1{
+font-size:70px;
+color:#38bdf8;
+}
+
+.hero p{
+font-size:22px;
+color:#cbd5f5;
+}
+
+/* SERVICES */
+.services{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:20px;
+padding:60px;
+}
+
 .card{
 background:rgba(255,255,255,0.05);
-backdrop-filter:blur(12px);
-border:1px solid rgba(255,255,255,0.1);
+backdrop-filter:blur(10px);
 border-radius:12px;
 padding:20px;
+width:220px;
 transition:.3s;
+text-align:center;
 }
 
 .card:hover{
-transform:scale(1.05);
-box-shadow:0 0 25px rgba(56,189,248,0.5);
+transform:translateY(-8px);
+box-shadow:0 0 20px #38bdf8;
 }
 
-/* NAV LOGO */
-.logo{
-color:white;
-font-weight:bold;
+/* TESTIMONIALS */
+.testimonials{
+text-align:center;
+padding:40px;
 }
 
-/* SERVICE ICON ANIMATION */
-.icon{
-font-size:30px;
-margin-bottom:10px;
-display:block;
-animation:float 3s ease-in-out infinite;
-}
-
-@keyframes float{
-0%,100%{transform:translateY(0);}
-50%{transform:translateY(-8px);}
-}
-
-/* QUOTE */
-.quote{
-margin-top:20px;
-color:#ffb6c1;
-height:25px;
+.testimonial{
+display:inline-block;
+margin:10px;
+padding:15px 20px;
+background:rgba(255,255,255,0.05);
+border-radius:10px;
+font-size:14px;
 }
 
 /* STATS */
@@ -76,19 +114,20 @@ color:#38bdf8;
 
 /* FOOTER */
 footer{
-text-align:center;
-padding:20px;
 background:#020617;
+padding:20px;
+text-align:center;
 }
 
 </style>
-
 </head>
 
 <body>
 
+<canvas id="tech"></canvas>
+
 <nav>
-<div class="logo" id="logoText"></div>
+<div id="logo"></div>
 
 <div>
 <a href="index.html">Home</a>
@@ -96,54 +135,35 @@ background:#020617;
 <a href="services.html">Services</a>
 <a href="projects.html">Projects</a>
 <a href="contact.html">Contact</a>
-<a onclick="toggleTheme()">Theme</a>
 </div>
 </nav>
 
-<section>
-
-<h1 style="font-size:70px;-webkit-text-stroke:1px #38bdf8;color:transparent;">
-DeployLynx
-</h1>
-
+<div class="hero">
+<h1>DeployLynx</h1>
 <p>AI Automation • DevOps • Cloud Solutions</p>
+<div id="quote" style="color:#ffb6c1;margin-top:10px;"></div>
+</div>
 
-<div class="quote" id="quote"></div>
+<!-- SERVICES -->
+<section class="services">
+
+<div class="card">⚙️ DevOps CI/CD</div>
+<div class="card">☁️ AWS Cloud</div>
+<div class="card">🤖 AI Automation</div>
+<div class="card">🐳 Docker & Kubernetes</div>
 
 </section>
 
-<!-- SERVICES PREVIEW -->
-<section>
+<!-- TESTIMONIALS (SAFE ADD — NO BREAK) -->
+<section class="testimonials">
 
-<h2>Core Services</h2>
-
-<div style="display:flex;gap:20px;flex-wrap:wrap;justify-content:center;">
-
-<div class="card">
-<span class="icon">⚙️</span>
-DevOps CI/CD
-</div>
-
-<div class="card">
-<span class="icon">☁️</span>
-AWS Cloud
-</div>
-
-<div class="card">
-<span class="icon">🤖</span>
-AI Automation
-</div>
-
-<div class="card">
-<span class="icon">🐳</span>
-Docker & Kubernetes
-</div>
-
-</div>
+<div class="testimonial">Scalable systems built for production.</div>
+<div class="testimonial">Automation-first modern solutions.</div>
+<div class="testimonial">Secure cloud-native infrastructure.</div>
 
 </section>
 
-<!-- GITHUB STATS -->
+<!-- GITHUB -->
 <section class="stats">
 
 <h2>GitHub Activity</h2>
@@ -159,18 +179,73 @@ DeployLynx © 2026 All Rights Reserved
 
 <script>
 
-/* LOGO LOOP */
-let text="DeployLynx";
+/* TECH ANIMATED BACKGROUND */
+const canvas = document.getElementById("tech");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for(let i=0;i<70;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+dx:(Math.random()-0.5)*1.5,
+dy:(Math.random()-0.5)*1.5
+});
+}
+
+function draw(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+particles.forEach(p=>{
+p.x+=p.dx;
+p.y+=p.dy;
+
+if(p.x<0||p.x>canvas.width) p.dx*=-1;
+if(p.y<0||p.y>canvas.height) p.dy*=-1;
+
+ctx.fillStyle="#38bdf8";
+ctx.beginPath();
+ctx.arc(p.x,p.y,2,0,Math.PI*2);
+ctx.fill();
+});
+
+/* CONNECTING LINES */
+for(let i=0;i<particles.length;i++){
+for(let j=i+1;j<particles.length;j++){
+let dx=particles[i].x-particles[j].x;
+let dy=particles[i].y-particles[j].y;
+let dist=Math.sqrt(dx*dx+dy*dy);
+
+if(dist<120){
+ctx.strokeStyle="rgba(56,189,248,0.1)";
+ctx.beginPath();
+ctx.moveTo(particles[i].x,particles[i].y);
+ctx.lineTo(particles[j].x,particles[j].y);
+ctx.stroke();
+}
+}
+}
+
+requestAnimationFrame(draw);
+}
+draw();
+
+/* LOGO ANIMATION */
+let t="DeployLynx";
 let i=0;
 
 function animateLogo(){
-if(i<text.length){
-document.getElementById("logoText").innerHTML+=text.charAt(i);
+if(i<t.length){
+logo.innerHTML+=t[i];
 i++;
 setTimeout(animateLogo,120);
 }else{
 setTimeout(()=>{
-document.getElementById("logoText").innerHTML="";
+logo.innerHTML="";
 i=0;
 animateLogo();
 },1500);
@@ -179,39 +254,36 @@ animateLogo();
 animateLogo();
 
 /* QUOTE */
-let quoteText="Engineering scalable systems. Automating the future.";
+let q="Engineering scalable systems. Automating the future.";
 let j=0;
 
 function typeQuote(){
-if(j<quoteText.length){
-document.getElementById("quote").innerHTML+=quoteText.charAt(j);
+if(j<q.length){
+quote.innerHTML+=q[j];
 j++;
 setTimeout(typeQuote,50);
 }
 }
 typeQuote();
 
-/* FIXED GITHUB STATS (MULTIPLE REPOS) */
-
-const repos = [
+/* GITHUB STATS */
+const repos=[
 "deploylynx-monitoring",
 "deploylynx-infrastructure",
 "deploylynx-devsecops-pipeline",
 "ai-automation-tools"
 ];
 
-let totalStars = 0;
-let totalForks = 0;
+let stars=0,forks=0;
 
-repos.forEach(repo=>{
-fetch(`https://api.github.com/repos/Deploylynx/${repo}`)
+repos.forEach(r=>{
+fetch(`https://api.github.com/repos/Deploylynx/${r}`)
 .then(res=>res.json())
-.then(data=>{
-totalStars += data.stargazers_count || 0;
-totalForks += data.forks_count || 0;
-
-document.getElementById("stars").innerText = totalStars;
-document.getElementById("forks").innerText = totalForks;
+.then(d=>{
+stars+=d.stargazers_count||0;
+forks+=d.forks_count||0;
+document.getElementById("stars").innerText=stars;
+document.getElementById("forks").innerText=forks;
 });
 });
 
