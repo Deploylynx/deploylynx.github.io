@@ -27,7 +27,7 @@ nav{
   justify-content:space-between;
   padding:20px 50px;
   position:relative;
-  z-index:2;
+  z-index:3;
 }
 
 .logo{
@@ -46,39 +46,44 @@ nav{
   color:#00c6ff;
 }
 
-/* BACKGROUND CANVAS */
+/* BACKGROUND */
 canvas{
   position:fixed;
   top:0;
   left:0;
   z-index:0;
+  pointer-events:none;
 }
 
 /* MAIN */
 .container{
   display:flex;
+  flex-direction:column;
   align-items:center;
-  justify-content:space-around;
+  justify-content:center;
   height:90vh;
   position:relative;
-  z-index:1;
-  flex-wrap:wrap;
+  z-index:2;
+  gap:20px;
 }
 
-/* LEFT ANIMATION */
+/* LOTTIE */
 .visual{
-  max-width:400px;
+  position:absolute;
+  left:80px;
 }
 
 /* FORM CARD */
 .form-card{
-  background:rgba(0,0,0,0.7);
+  background:rgba(0,0,0,0.75);
   padding:30px;
   border-radius:15px;
-  width:320px;
+  width:340px;
   backdrop-filter:blur(10px);
   border:1px solid rgba(255,255,255,0.1);
   transition:0.3s;
+  z-index:5;
+  position:relative;
 }
 
 .form-card:hover{
@@ -117,23 +122,36 @@ canvas{
   background:#ff6ec7;
 }
 
-/* SOCIAL LINKS */
+/* SUCCESS MESSAGE */
+.success{
+  display:none;
+  margin-top:15px;
+  padding:10px;
+  background:#00c6ff;
+  color:#000;
+  border-radius:8px;
+  text-align:center;
+  animation:fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(10px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* SOCIAL (NOW BELOW CARD WITH SPACE) */
 .social{
-  margin-top:20px;
   display:flex;
-  justify-content:space-between;
-  gap:15px;
+  gap:20px;
+  margin-top:10px;
 }
 
 .social a{
-  flex:1;
-  text-align:center;
-  padding:10px;
+  padding:10px 15px;
   background:#111;
   border-radius:8px;
   color:#fff;
   text-decoration:none;
-  font-size:14px;
   transition:0.3s;
 }
 
@@ -176,13 +194,13 @@ canvas{
 
 <div class="container">
 
-  <!-- LEFT LOTTIE -->
+  <!-- LOTTIE -->
   <div class="visual">
     <lottie-player 
       src="https://assets2.lottiefiles.com/packages/lf20_kyu7xb1v.json"
       background="transparent"
       speed="1"
-      style="width:350px;height:350px;"
+      style="width:320px;height:320px;"
       loop autoplay>
     </lottie-player>
   </div>
@@ -191,18 +209,25 @@ canvas{
   <div class="form-card">
     <h2>Contact Us</h2>
 
-    <input type="text" placeholder="Your Name">
-    <input type="email" placeholder="Your Email">
-    <textarea rows="4" placeholder="Message"></textarea>
+    <form id="contactForm">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea rows="4" placeholder="Message" required></textarea>
 
-    <button>Send Message</button>
+      <button type="submit">Send Message</button>
+    </form>
 
-    <div class="social">
-      <a href="https://github.com/Deploylynx-tech" target="_blank">GitHub</a>
-      <a href="https://linkedin.com" target="_blank">LinkedIn</a>
-      <a href="mailto:deploylynx26@gmail.com">Email</a>
-      <a href="https://instagram.com" target="_blank">Instagram</a>
+    <div class="success" id="successMsg">
+      ✅ Message sent successfully!
     </div>
+  </div>
+
+  <!-- SOCIAL -->
+  <div class="social">
+    <a href="https://github.com/Deploylynx-tech" target="_blank">GitHub</a>
+    <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+    <a href="mailto:deploylynx26@gmail.com">Email</a>
+    <a href="https://instagram.com" target="_blank">Instagram</a>
   </div>
 
 </div>
@@ -212,6 +237,13 @@ canvas{
 document.addEventListener("mousemove",e=>{
   document.querySelector(".cursor").style.left=e.clientX+"px";
   document.querySelector(".cursor").style.top=e.clientY+"px";
+});
+
+/* SUCCESS MESSAGE */
+document.getElementById("contactForm").addEventListener("submit",function(e){
+  e.preventDefault();
+  document.getElementById("successMsg").style.display="block";
+  this.reset();
 });
 
 /* NETWORK BACKGROUND */
@@ -227,8 +259,8 @@ for(let i=0;i<60;i++){
   nodes.push({
     x:Math.random()*canvas.width,
     y:Math.random()*canvas.height,
-    dx:(Math.random()-0.5)*1,
-    dy:(Math.random()-0.5)*1
+    dx:(Math.random()-0.5),
+    dy:(Math.random()-0.5)
   });
 }
 
