@@ -12,16 +12,15 @@ html{scroll-behavior:smooth;}
 body{
   background:#0a0f1c;
   color:#fff;
-  overflow-x:hidden;
 }
 
-/* NAVBAR (UNCHANGED STYLE) */
+/* NAVBAR */
 nav{
   display:flex;
   justify-content:space-between;
   padding:20px 50px;
   position:relative;
-  z-index:1000;
+  z-index:9999;
 }
 
 .logo{
@@ -30,12 +29,11 @@ nav{
   color:#fff;
 }
 
-/* MENU FIX */
+/* MENU */
 .menu a{
   margin-left:25px;
   text-decoration:none;
   color:#ccc;
-  transition:0.3s;
   cursor:pointer;
 }
 .menu a:hover{color:#00c6ff;}
@@ -85,36 +83,25 @@ nav{
   box-shadow:0 0 25px #00c6ff;
 }
 
-/* SCROLL */
-.fade{
-  opacity:0;
-  transform:translateY(40px);
-  transition:1s;
-}
-.fade.show{
-  opacity:1;
-  transform:translateY(0);
-}
-
-/* DOT BG (FIX ONLY) */
+/* DOT BG FIX */
 canvas{
   position:fixed;
   top:0;
+  left:0;
   z-index:-1;
-  pointer-events:none;
+  pointer-events:none; /* CLICK FIX */
 }
 
 /* CURSOR */
 .cursor{
-  width:10px;
-  height:10px;
+  width:10px;height:10px;
   background:gold;
   border-radius:50%;
   position:fixed;
   pointer-events:none;
-  box-shadow:0 0 15px gold;
-  transform:translate(-50%,-50%);
   z-index:999;
+  transform:translate(-50%,-50%);
+  box-shadow:0 0 15px gold;
 }
 </style>
 </head>
@@ -128,45 +115,33 @@ canvas{
   <div class="logo" id="typingLogo"></div>
 
   <div class="menu">
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="projects.html">Projects</a>
+    <a href="contact.html">Contact</a>
     <a href="#">🌙 Theme</a>
   </div>
 </nav>
 
-<!-- HOME -->
-<div id="home" class="hero section">
+<!-- HERO -->
+<div class="hero section">
   <div class="title">DeployLynx</div>
   <div class="quote" id="quote"></div>
 </div>
 
-<!-- ABOUT -->
-<div id="about" class="section fade">
+<!-- ABOUT ONLY -->
+<div class="section">
   <h2 style="color:#00c6ff;">About</h2>
   <p>
-    DeployLynx engineers scalable, secure, and production-grade digital systems by integrating modern DevOps practices,
-    cloud-native infrastructure, and intelligent automation. Our approach focuses on reliability, performance, and
-    continuous delivery, enabling businesses to build, deploy, and scale applications with confidence in fast-paced environments.
+    DeployLynx engineers scalable, secure, and production-grade systems using modern DevOps practices,
+    cloud-native infrastructure, and AI-powered automation. We focus on reliability, performance, and
+    seamless deployment pipelines to help businesses build and scale with confidence.
   </p>
 </div>
 
-<!-- SERVICES -->
-<div id="services" class="section fade">
-  <h2 style="color:#00c6ff;">Services</h2>
-  <p>DevOps • Cloud • AI Automation</p>
-</div>
-
-<!-- PROJECTS -->
-<div id="projects" class="section fade">
-  <h2 style="color:#00c6ff;">Projects</h2>
-  <p>Coming Soon</p>
-</div>
-
 <!-- TEAM -->
-<div class="section fade">
+<div class="section">
   <h2 style="color:#00c6ff;">Our Team</h2>
 
   <div class="team-grid">
@@ -187,10 +162,10 @@ canvas{
   </div>
 </div>
 
-<!-- CONTACT -->
-<div id="contact" class="section fade">
-  <h2 style="color:#00c6ff;">Contact</h2>
-  <p>your@email.com</p>
+<!-- SIMPLE FOOTER -->
+<div class="section">
+  <h2 style="color:#00c6ff;">Coming Soon</h2>
+  <p>More advanced DeployLynx systems are on the way.</p>
 </div>
 
 <script>
@@ -204,7 +179,7 @@ function type(){
 }
 type();
 
-/* QUOTE TYPING (RESTORED) */
+/* QUOTE TYPING */
 let q="Engineering the future with scalable systems, intelligent automation, and cloud-native excellence.";
 let j=0;
 function typeQuote(){
@@ -217,8 +192,8 @@ typeQuote();
 
 /* CURSOR */
 document.addEventListener("mousemove",e=>{
-  document.querySelector(".cursor").style.top=e.clientY+"px";
   document.querySelector(".cursor").style.left=e.clientX+"px";
+  document.querySelector(".cursor").style.top=e.clientY+"px";
 });
 
 /* DOTS */
@@ -241,15 +216,6 @@ function draw(){
   requestAnimationFrame(draw);
 }
 draw();
-
-/* SCROLL ANIMATION */
-window.addEventListener("scroll",()=>{
-  document.querySelectorAll(".fade").forEach(el=>{
-    if(el.getBoundingClientRect().top<window.innerHeight-100){
-      el.classList.add("show");
-    }
-  });
-});
 </script>
 
 </body>
