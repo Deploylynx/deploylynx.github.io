@@ -124,7 +124,6 @@ nav{
   opacity:1;
 }
 
-/* hover */
 .card:hover{
   transform:translateY(-10px) scale(1.03);
   box-shadow:0 0 25px #00c6ff;
@@ -163,6 +162,19 @@ nav{
   background:#ff6ec7;
 }
 
+/* CURSOR */
+.cursor{
+  width:10px;
+  height:10px;
+  background:gold;
+  border-radius:50%;
+  position:fixed;
+  pointer-events:none;
+  box-shadow:0 0 15px gold;
+  transform:translate(-50%,-50%);
+  z-index:999;
+}
+
 /* FOOTER */
 .footer{
   text-align:center;
@@ -174,6 +186,8 @@ nav{
 </head>
 
 <body>
+
+<div class="cursor"></div>
 
 <nav>
   <div class="logo">DeployLynx</div>
@@ -197,7 +211,6 @@ nav{
     </p>
   </div>
 
-  <!-- LOTTIE -->
   <lottie-player 
     src="https://assets2.lottiefiles.com/packages/lf20_jcikwtux.json"
     background="transparent"
@@ -218,28 +231,28 @@ nav{
       <h3>DevSecOps Pipeline</h3>
       <div class="metric">⬇ Deployment time reduced by 60%</div>
       <p>CI/CD automation using GitHub Actions, Docker, and security scanning tools.</p>
-      <a href="#" class="btn">View Details</a>
+      <a href="https://github.com/Deploylynx-tech" target="_blank" class="btn">View Details</a>
     </div>
 
     <div class="card">
       <h3>Kubernetes Infrastructure</h3>
       <div class="metric">⚡ 1M+ requests/day handled</div>
       <p>Scalable Kubernetes cluster with load balancing, monitoring and autoscaling.</p>
-      <a href="#" class="btn">View Details</a>
+      <a href="https://github.com/Deploylynx-tech" target="_blank" class="btn">View Details</a>
     </div>
 
     <div class="card">
       <h3>AWS Cloud Architecture</h3>
       <div class="metric">☁ 99.9% uptime achieved</div>
       <p>Secure infrastructure built with Terraform, EC2, S3 and VPC networking.</p>
-      <a href="#" class="btn">View Details</a>
+      <a href="https://github.com/Deploylynx-tech" target="_blank" class="btn">View Details</a>
     </div>
 
     <div class="card">
       <h3>AI Automation System</h3>
       <div class="metric">🤖 40% manual work reduced</div>
       <p>AI-powered automation pipelines improving workflow efficiency.</p>
-      <a href="#" class="btn">View Details</a>
+      <a href="https://github.com/Deploylynx-tech" target="_blank" class="btn">View Details</a>
     </div>
 
   </div>
@@ -248,6 +261,14 @@ nav{
 <div class="footer">
   © 2026 DeployLynx — Engineering scalable digital systems
 </div>
+
+<script>
+/* GOLD CURSOR */
+document.addEventListener("mousemove",e=>{
+  document.querySelector(".cursor").style.left=e.clientX+"px";
+  document.querySelector(".cursor").style.top=e.clientY+"px";
+});
+</script>
 
 </body>
 </html>
