@@ -2,181 +2,235 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>About - DeployLynx</title>
+<title>DeployLynx | About</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-
-body{
-margin:0;
-font-family:Arial;
-background:#0f172a;
-color:white;
-overflow-x:hidden;
+/* RESET */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: 'Segoe UI', sans-serif;
 }
 
-/* IMPORTANT FIX → allow clicks through background */
-canvas{
-position:fixed;
-top:0;
-left:0;
-z-index:-1;
-pointer-events:none;
+body{
+  background:#0a0f1c;
+  color:#fff;
+  overflow-x:hidden;
 }
 
 /* NAVBAR */
 nav{
-display:flex;
-justify-content:space-between;
-padding:20px 40px;
-background:#020617;
-position:sticky;
-top:0;
-z-index:10;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 50px;
 }
 
-nav a{
-color:white;
-text-decoration:none;
-margin-left:20px;
-cursor:pointer;
+.logo{
+  font-size:22px;
+  font-weight:bold;
+  color:#00c6ff;
 }
 
-nav a:hover{
-color:#38bdf8;
+.menu a{
+  margin-left:25px;
+  text-decoration:none;
+  color:#ccc;
+  transition:0.3s;
+}
+
+.menu a:hover{
+  color:#00c6ff;
 }
 
 /* HERO */
-.container{
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-height:80vh;
-text-align:center;
+.hero{
+  text-align:center;
+  margin-top:80px;
 }
 
-/* TEXT */
-h1{
-font-size:50px;
-margin-bottom:10px;
+.typing-title{
+  font-size:42px;
+  font-weight:bold;
+  color:#00c6ff;
 }
 
-.subtitle{
-font-size:20px;
-color:#cbd5f5;
-margin-bottom:40px;
+.typing-quote{
+  margin-top:15px;
+  font-size:18px;
+  color:#ff6ec7;
 }
 
-/* SIMPLE INFO (NO CARDS) */
-.info{
-font-size:18px;
-color:#94a3b8;
-margin-bottom:20px;
+/* ABOUT SECTION */
+.about{
+  max-width:900px;
+  margin:80px auto;
+  text-align:center;
+  line-height:1.8;
+  font-size:17px;
+  color:#ccc;
 }
 
-/* COMING SOON */
-.coming{
-margin-top:40px;
-font-size:22px;
-color:#38bdf8;
+/* DOTS BACKGROUND */
+canvas{
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:-1;
 }
 
-/* FOOTER */
-footer{
-background:#020617;
-padding:20px;
-text-align:center;
+/* STAR CURSOR */
+.cursor{
+  width:20px;
+  height:20px;
+  position:fixed;
+  pointer-events:none;
+  transform:translate(-50%,-50%);
+  z-index:999;
 }
 
+.star{
+  width:100%;
+  height:100%;
+  background:gold;
+  clip-path: polygon(
+    50% 0%, 61% 35%, 98% 35%, 
+    68% 57%, 79% 91%, 
+    50% 70%, 21% 91%, 
+    32% 57%, 2% 35%, 
+    39% 35%
+  );
+  box-shadow:0 0 15px gold;
+}
 </style>
 </head>
 
 <body>
 
-<canvas id="bg"></canvas>
+<!-- DOT BACKGROUND -->
+<canvas id="dots"></canvas>
 
+<!-- CURSOR -->
+<div class="cursor"><div class="star"></div></div>
+
+<!-- NAVBAR -->
 <nav>
-<div id="logo"></div>
-
-<div>
-<a href="index.html">Home</a>
-<a href="about.html">About</a>
-<a href="services.html">Services</a>
-<a href="projects.html">Projects</a>
-<a href="contact.html">Contact</a>
-</div>
+  <div class="logo">DeployLynx</div>
+  <div class="menu">
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Projects</a>
+    <a href="#">Contact</a>
+    <a href="#">Theme</a>
+  </div>
 </nav>
 
-<div class="container">
-
-<h1>About DeployLynx</h1>
-
-<div class="subtitle">
-AI Automation • DevOps • Cloud Solutions
+<!-- HERO -->
+<div class="hero">
+  <div class="typing-title" id="title"></div>
+  <div class="typing-quote" id="quote"></div>
 </div>
 
-<!-- SIMPLE TEXT (NO CARDS) -->
-<div class="info">Services — DevOps • Cloud • AI Automation</div>
-<div class="info">Projects</div>
+<!-- ABOUT TEXT -->
+<div class="about">
+  <p>
+    DeployLynx is a modern technology initiative focused on building scalable, resilient,
+    and production-grade digital systems powered by DevOps, Cloud Infrastructure, and
+    AI-driven automation. Our mission is to transform ideas into robust, real-world solutions
+    that are secure, efficient, and engineered for long-term growth.
+  </p>
 
-<div class="coming">Coming Soon</div>
+  <br>
 
+  <p>
+    We specialize in designing cloud-native architectures, automating complex workflows,
+    and implementing industry-level CI/CD pipelines that reflect real enterprise environments.
+    Every solution we build follows an automation-first mindset, ensuring speed, reliability,
+    and consistency across deployments.
+  </p>
+
+  <br>
+
+  <p>
+    At DeployLynx, we believe in building systems that are not only functional but also
+    intelligent — capable of scaling seamlessly, adapting to modern challenges, and delivering
+    high performance in production environments. Our work reflects precision, innovation,
+    and a commitment to engineering excellence.
+  </p>
 </div>
-
-<footer>
-DeployLynx © 2026 All Rights Reserved
-</footer>
 
 <script>
+/* TYPING ANIMATION */
+const titleText = "DeployLynx";
+const quoteText = "Engineering the future with scalable systems, intelligent automation, and cloud-native excellence.";
 
-/* BACKGROUND (NON-BLOCKING) */
-const canvas=document.getElementById("bg");
-const ctx=canvas.getContext("2d");
+let i = 0;
+let j = 0;
 
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
+function typeTitle(){
+  if(i < titleText.length){
+    document.getElementById("title").innerHTML += titleText.charAt(i);
+    i++;
+    setTimeout(typeTitle,100);
+  } else {
+    setTimeout(typeQuote,500);
+  }
+}
 
-let p=[];
+function typeQuote(){
+  if(j < quoteText.length){
+    document.getElementById("quote").innerHTML += quoteText.charAt(j);
+    j++;
+    setTimeout(typeQuote,40);
+  }
+}
 
-for(let i=0;i<50;i++){
-p.push({
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-dx:(Math.random()-0.5),
-dy:(Math.random()-0.5)
+typeTitle();
+
+/* STAR CURSOR */
+const cursor = document.querySelector(".cursor");
+document.addEventListener("mousemove", e => {
+  cursor.style.top = e.clientY + "px";
+  cursor.style.left = e.clientX + "px";
 });
+
+/* DOT BACKGROUND */
+const canvas = document.getElementById("dots");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let dots = [];
+
+for(let i=0;i<100;i++){
+  dots.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    r:Math.random()*2
+  });
 }
 
 function draw(){
-ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="#00c6ff";
 
-p.forEach(pt=>{
-pt.x+=pt.dx;
-pt.y+=pt.dy;
+  dots.forEach(d=>{
+    ctx.beginPath();
+    ctx.arc(d.x,d.y,d.r,0,Math.PI*2);
+    ctx.fill();
 
-ctx.fillStyle="#38bdf8";
-ctx.beginPath();
-ctx.arc(pt.x,pt.y,2,0,Math.PI*2);
-ctx.fill();
-});
+    d.y += 0.3;
+    if(d.y > canvas.height) d.y = 0;
+  });
 
-requestAnimationFrame(draw);
+  requestAnimationFrame(draw);
 }
+
 draw();
-
-/* LOGO ANIMATION */
-let t="DeployLynx",i=0;
-
-function anim(){
-if(i<t.length){
-logo.innerHTML+=t[i++];
-setTimeout(anim,120);
-}else{
-setTimeout(()=>{logo.innerHTML="";i=0;anim();},1500);
-}
-}
-anim();
-
 </script>
 
 </body>
