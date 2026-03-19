@@ -222,13 +222,15 @@ document.addEventListener("mousemove",e=>{
   document.querySelector(".cursor").style.top=e.clientY+"px";
 });
 
-/* FORMSPREE AJAX SUBMIT */
+/* ✅ FIXED FORM (FORMSPREE + GOOGLE SHEETS BOTH) */
 const form = document.getElementById("contactForm");
+
 form.addEventListener("submit", async function(e){
   e.preventDefault();
 
   const data = new FormData(form);
 
+  /* 1️⃣ SEND EMAIL (FORMSPREE) */
   await fetch(form.action, {
     method: "POST",
     body: data,
@@ -237,6 +239,21 @@ form.addEventListener("submit", async function(e){
     }
   });
 
+  /* 2️⃣ SEND TO GOOGLE SHEETS (FIXED JSON ✅) */
+  await fetch("https://script.google.com/macros/s/AKfycbztEuM2vU1PhSe5x4qr7N-FSvyFriPQtkuAEP74UxieW6sRRxQXps-Q-tjmhAmbSJ-KFg/exec", {
+    method: "POST",
+    body: JSON.stringify({
+      name: data.get("name"),
+      email: data.get("email"),
+      message: data.get("message")
+    }),
+    headers: {
+      "Content-Type": "application/json"
+    },
+    mode: "no-cors"   // 🔥 REQUIRED for Google Apps Script
+  });
+
+  /* SUCCESS UI */
   document.getElementById("successMsg").style.display = "block";
   form.reset();
 });
