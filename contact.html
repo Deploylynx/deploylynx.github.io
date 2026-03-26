@@ -127,6 +127,27 @@ canvas{
   text-align:center;
 }
 
+/* WHATSAPP BUTTON */
+.whatsapp-btn{
+  margin-top:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  background:#25D366;
+  color:#fff;
+  padding:10px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:500;
+  transition:0.3s;
+}
+
+.whatsapp-btn:hover{
+  background:#1ebe5d;
+  transform:translateY(-2px);
+}
+
 .social{
   display:flex;
   gap:20px;
@@ -192,7 +213,6 @@ canvas{
   <div class="form-card">
     <h2>Contact Us</h2>
 
-    <!-- ✅ FORMSPREE CONNECTED -->
     <form id="contactForm" action="https://formspree.io/f/xpqykbvr" method="POST">
       <input type="text" name="name" placeholder="Your Name" required>
       <input type="email" name="email" placeholder="Your Email" required>
@@ -200,6 +220,11 @@ canvas{
 
       <button type="submit">Send Message</button>
     </form>
+
+    <!-- ✅ WHATSAPP BUTTON -->
+    <a href="https://wa.me/message/VXHPTQC4ZU46A1" target="_blank" class="whatsapp-btn">
+      💬 Chat on WhatsApp
+    </a>
 
     <div class="success" id="successMsg">
       ✅ Message sent successfully!
@@ -216,13 +241,11 @@ canvas{
 </div>
 
 <script>
-/* CURSOR */
 document.addEventListener("mousemove",e=>{
   document.querySelector(".cursor").style.left=e.clientX+"px";
   document.querySelector(".cursor").style.top=e.clientY+"px";
 });
 
-/* ✅ FIXED ONE-CLICK FORM */
 const form = document.getElementById("contactForm");
 const button = form.querySelector("button");
 
@@ -236,15 +259,11 @@ form.addEventListener("submit", async function(e){
 
   try {
     await Promise.all([
-
-      /* 1️⃣ Formspree */
       fetch(form.action, {
         method: "POST",
         body: data,
         headers: { 'Accept': 'application/json' }
       }),
-
-      /* 2️⃣ Google Sheets */
       fetch("https://script.google.com/macros/s/AKfycbztEuM2vU1PhSe5x4qr7N-FSvyFriPQtkuAEP74UxieW6sRRxQXps-Q-tjmhAmbSJ-KFg/exec", {
         method: "POST",
         body: JSON.stringify({
@@ -255,7 +274,6 @@ form.addEventListener("submit", async function(e){
         headers: { "Content-Type": "application/json" },
         mode: "no-cors"
       })
-
     ]);
 
     document.getElementById("successMsg").style.display = "block";
@@ -269,7 +287,6 @@ form.addEventListener("submit", async function(e){
   button.innerText = "Send Message";
 });
 
-/* BACKGROUND */
 const canvas = document.getElementById("bg");
 const ctx = canvas.getContext("2d");
 
