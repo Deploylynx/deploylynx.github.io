@@ -26,21 +26,19 @@ nav{
   justify-content:space-between;
   padding:20px 50px;
   position:relative;
-  z-index:10;
+  z-index:3;
 }
 
 .logo{
   font-size:22px;
   color:#00c6ff;
   font-weight:bold;
-  cursor:pointer;
 }
 
 .menu a{
   margin-left:25px;
   color:#ccc;
   text-decoration:none;
-  cursor:pointer;
 }
 
 .menu a:hover{
@@ -129,33 +127,10 @@ canvas{
   text-align:center;
 }
 
-/* WHATSAPP BUTTON */
-.whatsapp-btn{
-  margin-top:10px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  background:#25D366;
-  color:#fff;
-  padding:10px;
-  border-radius:8px;
-  text-decoration:none;
-  font-weight:500;
-  transition:0.3s;
-  cursor:pointer;
-}
-
-.whatsapp-btn:hover{
-  background:#1ebe5d;
-  transform:translateY(-2px);
-}
-
 .social{
   display:flex;
   gap:20px;
   margin-top:10px;
-  z-index:5;
 }
 
 .social a{
@@ -165,7 +140,6 @@ canvas{
   color:#fff;
   text-decoration:none;
   transition:0.3s;
-  cursor:pointer;
 }
 
 .social a:hover{
@@ -184,87 +158,6 @@ canvas{
   transform:translate(-50%,-50%);
   z-index:999;
 }
-
-/* AI CHATBOT */
-#chatbotIcon{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  background:#00c6ff;
-  width:60px;
-  height:60px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:28px;
-  cursor:pointer;
-  z-index:1000;
-  box-shadow:0 0 15px #00c6ff;
-  transition:0.3s;
-}
-
-#chatbotIcon:hover{
-  background:#ff6ec7;
-}
-
-#chatbotWindow{
-  position:fixed;
-  right:20px;
-  bottom:90px;
-  width:320px;
-  max-height:400px;
-  background:rgba(0,0,0,0.9);
-  border-radius:15px;
-  display:none;
-  flex-direction:column;
-  z-index:1000;
-  overflow:hidden;
-  border:1px solid #00c6ff;
-}
-
-#chatbotHeader{
-  background:#00c6ff;
-  color:#000;
-  padding:10px;
-  font-weight:bold;
-  text-align:center;
-  cursor:pointer;
-}
-
-#chatbotMessages{
-  flex:1;
-  padding:10px;
-  overflow-y:auto;
-  font-size:14px;
-}
-
-#chatbotInput{
-  display:flex;
-  border-top:1px solid #00c6ff;
-}
-
-#chatbotInput input{
-  flex:1;
-  padding:10px;
-  border:none;
-  border-radius:0;
-  background:#111;
-  color:#fff;
-}
-
-#chatbotInput button{
-  padding:10px;
-  background:#00c6ff;
-  border:none;
-  cursor:pointer;
-  color:#000;
-  transition:0.3s;
-}
-
-#chatbotInput button:hover{
-  background:#ff6ec7;
-}
 </style>
 </head>
 
@@ -274,7 +167,7 @@ canvas{
 <div class="cursor"></div>
 
 <nav>
-  <div class="logo" onclick="window.location.href='index.html'">DeployLynx</div>
+  <div class="logo">DeployLynx</div>
   <div class="menu">
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
@@ -299,6 +192,7 @@ canvas{
   <div class="form-card">
     <h2>Contact Us</h2>
 
+    <!-- ✅ FORMSPREE CONNECTED -->
     <form id="contactForm" action="https://formspree.io/f/xpqykbvr" method="POST">
       <input type="text" name="name" placeholder="Your Name" required>
       <input type="email" name="email" placeholder="Your Email" required>
@@ -306,11 +200,6 @@ canvas{
 
       <button type="submit">Send Message</button>
     </form>
-
-    <!-- ✅ WHATSAPP BUTTON -->
-    <a href="https://wa.me/message/VXHPTQC4ZU46A1" target="_blank" class="whatsapp-btn">
-      💬 Chat on WhatsApp
-    </a>
 
     <div class="success" id="successMsg">
       ✅ Message sent successfully!
@@ -326,30 +215,97 @@ canvas{
 
 </div>
 
-<!-- AI Chatbot -->
-<div id="chatbotIcon">💬</div>
-<div id="chatbotWindow">
-  <div id="chatbotHeader">AI Chatbot (Click to Close)</div>
-  <div id="chatbotMessages"></div>
-  <div id="chatbotInput">
-    <input type="text" id="chatInput" placeholder="Type a message..." />
-    <button id="sendBtn">Send</button>
-  </div>
-</div>
-
 <script>
-// Custom cursor
-document.addEventListener("mousemove", e=>{
+/* CURSOR */
+document.addEventListener("mousemove",e=>{
   document.querySelector(".cursor").style.left=e.clientX+"px";
   document.querySelector(".cursor").style.top=e.clientY+"px";
 });
 
-// Contact form submit
+<script>
+// AI Chatbot logic
+const chatbotIcon = document.getElementById("chatbotIcon");
+const chatbotWindow = document.getElementById("chatbotWindow");
+const chatbotHeader = document.getElementById("chatbotHeader");
+const chatbotMessages = document.getElementById("chatbotMessages");
+const chatInput = document.getElementById("chatInput");
+const sendBtn = document.getElementById("sendBtn");
+
+chatbotIcon.addEventListener("click", ()=>{
+  chatbotWindow.style.display = chatbotWindow.style.display==="flex"?"none":"flex";
+});
+
+chatbotHeader.addEventListener("click", ()=>{
+  chatbotWindow.style.display="none";
+});
+
+function addMessage(text, sender){
+  const msg = document.createElement("div");
+  msg.style.marginBottom="10px";
+  msg.style.padding="5px 8px";
+  msg.style.borderRadius="6px";
+  msg.style.maxWidth="90%";
+  msg.style.wordWrap="break-word";
+
+  if(sender==="user"){
+    msg.style.background="#00c6ff";
+    msg.style.color="#000";
+    msg.style.alignSelf="flex-end";
+    msg.textContent = text;
+  } else {
+    msg.style.background="#111";
+    msg.style.color="#00c6ff";
+    msg.style.alignSelf="flex-start";
+    msg.textContent = text;
+  }
+
+  chatbotMessages.appendChild(msg);
+  chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+}
+
+// Professional AI response logic
+function getAIResponse(userText){
+  const text = userText.toLowerCase();
+
+  if(text.includes("hello") || text.includes("hi")){
+    return "Hello! 👋 How can I assist you with your DevOps, deployment, or technical queries today?";
+  } else if(text.includes("help") || text.includes("support")){
+    return "Sure! I’m here to help. Could you please specify the area you need assistance with: CI/CD, AWS, Kubernetes, or automation?";
+  } else if(text.includes("contact") || text.includes("email")){
+    return "You can reach us directly at deploylynx26@gmail.com or via our WhatsApp chat for instant support.";
+  } else if(text.includes("services")){
+    return "We provide end-to-end DevOps solutions including CI/CD pipelines, cloud deployments, automation, and monitoring.";
+  } else if(text.includes("thank")){
+    return "You're welcome! If you have any more questions, feel free to ask.";
+  } else {
+    return "Thank you for your message. I’ll do my best to assist you! Could you please provide more details about your request?";
+  }
+}
+
+sendBtn.addEventListener("click", ()=>{
+  const val = chatInput.value.trim();
+  if(!val) return;
+  addMessage(val,"user");
+  chatInput.value="";
+  
+  setTimeout(()=>{
+    const aiReply = getAIResponse(val);
+    addMessage(aiReply,"ai");
+  },500);
+});
+
+chatInput.addEventListener("keypress", e=>{
+  if(e.key==="Enter") sendBtn.click();
+});
+</script>  
+
+/* ✅ FIXED ONE-CLICK FORM */
 const form = document.getElementById("contactForm");
 const button = form.querySelector("button");
 
 form.addEventListener("submit", async function(e){
   e.preventDefault();
+
   button.disabled = true;
   button.innerText = "Sending...";
 
@@ -357,11 +313,15 @@ form.addEventListener("submit", async function(e){
 
   try {
     await Promise.all([
+
+      /* 1️⃣ Formspree */
       fetch(form.action, {
         method: "POST",
         body: data,
         headers: { 'Accept': 'application/json' }
       }),
+
+      /* 2️⃣ Google Sheets */
       fetch("https://script.google.com/macros/s/AKfycbztEuM2vU1PhSe5x4qr7N-FSvyFriPQtkuAEP74UxieW6sRRxQXps-Q-tjmhAmbSJ-KFg/exec", {
         method: "POST",
         body: JSON.stringify({
@@ -372,6 +332,7 @@ form.addEventListener("submit", async function(e){
         headers: { "Content-Type": "application/json" },
         mode: "no-cors"
       })
+
     ]);
 
     document.getElementById("successMsg").style.display = "block";
@@ -385,7 +346,7 @@ form.addEventListener("submit", async function(e){
   button.innerText = "Send Message";
 });
 
-// Animated background nodes
+/* BACKGROUND */
 const canvas = document.getElementById("bg");
 const ctx = canvas.getContext("2d");
 
@@ -393,6 +354,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let nodes = [];
+
 for(let i=0;i<60;i++){
   nodes.push({
     x:Math.random()*canvas.width,
@@ -438,44 +400,6 @@ function draw(){
 }
 
 draw();
-
-// AI Chatbot logic
-const chatbotIcon = document.getElementById("chatbotIcon");
-const chatbotWindow = document.getElementById("chatbotWindow");
-const chatbotHeader = document.getElementById("chatbotHeader");
-const chatbotMessages = document.getElementById("chatbotMessages");
-const chatInput = document.getElementById("chatInput");
-const sendBtn = document.getElementById("sendBtn");
-
-chatbotIcon.addEventListener("click", ()=>{
-  chatbotWindow.style.display = chatbotWindow.style.display==="flex"?"none":"flex";
-});
-
-chatbotHeader.addEventListener("click", ()=>{
-  chatbotWindow.style.display="none";
-});
-
-function addMessage(text, sender){
-  const msg = document.createElement("div");
-  msg.style.marginBottom="10px";
-  msg.textContent = (sender==="user"? "You: ":"AI: ") + text;
-  chatbotMessages.appendChild(msg);
-  chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-}
-
-// Simple AI placeholder
-sendBtn.addEventListener("click", ()=>{
-  const val = chatInput.value.trim();
-  if(!val) return;
-  addMessage(val,"user");
-  chatInput.value="";
-  setTimeout(()=>{ addMessage("Hello! This is a demo AI response. 🔹","ai"); },500);
-});
-
-chatInput.addEventListener("keypress", e=>{
-  if(e.key==="Enter") sendBtn.click();
-});
 </script>
-
 </body>
 </html>
