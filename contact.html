@@ -277,7 +277,7 @@ canvas{
     <div class="chat-msg bot">Hi 👋 I'm DeployLynx AI. How can I help with your DevOps needs?</div>
   </div>
   <div class="chat-input">
-    <input type="text" id="chatInput" placeholder="Ask something...">
+    <input type="text" id="chatInput" placeholder="Hi, I need CICD...">
     <button onclick="sendMsg()">➤</button>
   </div>
 </div>
@@ -346,9 +346,6 @@ function addMsg(text,type){
 
 function getAIReply(msg){
   msg=msg.toLowerCase();
-
-  if(msg.includes("price")||msg.includes("cost"))
-    return "Pricing depends on your infrastructure and scale. Share details via contact form and we’ll provide a tailored quote.";
 
   if(msg.includes("deploy")||msg.includes("ci/cd"))
     return "We build automated CI/CD pipelines using GitHub Actions, Docker, and AWS for zero-downtime deployments.";
