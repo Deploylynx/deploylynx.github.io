@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+        Build Reliable Infrastructure With DeployLynx
+      </h2>
+
+      <p>
+        From CI/CD automation and AWS infrastructure to monitoring dashboards and DevSecOps pipelines — DeployLynx helps startups deploy with confidence.
+      </p>
+
+      <a href="contact.html" class="cta-btn">
+        Contact DeployLynx
+      </a>
+
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+
+  <footer>
+    © 2026 DeployLynx. All Rights Reserved.
+  </footer>
+
+  <!-- JavaScript -->
+
+  <script>
+
+    // Mobile Menu
+
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+
+    menuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    // Typing Animation Without Cursor
+
+    const text = "DeployLynx";
+    const typingLogo = document.getElementById('typingLogo');
+
+    let index = 0;
+
+    function typeEffect() {
+      if(index < text.length) {
+        typingLogo.innerHTML += text.charAt(index);
+        index++;
+        setTimeout(typeEffect, 140);
+      }
+    }
+
+    window.onload = typeEffect;
+
+  </script>
+
+</body>
+</html>
